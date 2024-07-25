@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: your_name
+      author: taysett
       changes:
         - createTable:
             tableName: dictionary
@@ -25,7 +25,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 2
-      author: your_name
+      author: taysett
       changes:
         - createTable:
             tableName: data
