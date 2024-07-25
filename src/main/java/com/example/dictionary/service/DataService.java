@@ -74,7 +74,7 @@ public class DataService {
             dataDtos.add(
                     new DataDto(
                             data.getId(),
-                            data.getDictionary().getId(), 
+                            data.getDictionary().getId(),
                             data.getCode(),
                             data.getValue()
                     )
