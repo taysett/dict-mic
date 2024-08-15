@@ -1,7 +1,7 @@
 package com.example.dictionary.service;
 
-import com.example.dictionary.dto.CreateDataDto;
 import com.example.dictionary.dto.DataDto;
+import com.example.dictionary.dto.DictionaryDto;
 import com.example.dictionary.model.Data;
 import com.example.dictionary.model.Dictionary;
 import com.example.dictionary.repository.DataRepository;
@@ -22,26 +22,20 @@ public class DataService {
         this.dictionaryRepository = dictionaryRepository;
     }
 
-    public DataDto createData(CreateDataDto dataDto) {
-        Dictionary dictionary;
-
-        if (dataDto.getDictionary() != null) {
-            dictionary = dictionaryRepository.save(
-                    Dictionary.builder()
-                            .code(dataDto.getDictionary().getCode())
-                            .description(dataDto.getDictionary().getDescription())
-                            .build()
-            );
-        } else {
-            dictionary = dictionaryRepository.findById(dataDto.getDictionaryId()).orElseThrow();
-        }
+    public DataDto createData(DataDto dataDto) {
+        Dictionary dictionary = dictionaryRepository.save(
+                Dictionary.builder()
+                        .code(dataDto.getDictionary().getCode())
+                        .description(dataDto.getDictionary().getDescription())
+                        .build()
+        );
 
         Data data = Data.builder().code(dataDto.getCode()).value(dataDto.getValue()).dictionary(dictionary).build();
         Data createdData = dataRepository.save(data);
 
         return new DataDto(
                 createdData.getId(),
-                createdData.getDictionary().getId(),
+                new DictionaryDto(createdData.getDictionary().getId(), createdData.getDictionary().getCode(), createdData.getDictionary().getDescription()),
                 createdData.getCode(),
                 createdData.getValue()
         );
@@ -55,7 +49,7 @@ public class DataService {
             dataDtos.add(
                     new DataDto(
                             data.getId(),
-                            data.getDictionary().getId(),
+                            new DictionaryDto(data.getDictionary().getId(), data.getDictionary().getCode(), data.getDictionary().getDescription()),
                             data.getCode(),
                             data.getValue()
                     )
@@ -74,7 +68,7 @@ public class DataService {
             dataDtos.add(
                     new DataDto(
                             data.getId(),
-                            data.getDictionary().getId(),
+                            new DictionaryDto(data.getDictionary().getId(), data.getDictionary().getCode(), data.getDictionary().getDescription()),
                             data.getCode(),
                             data.getValue()
                     )
@@ -86,7 +80,10 @@ public class DataService {
 
     public DataDto getDataById(UUID id) {
         Data data = dataRepository.findById(id).orElseThrow();
-        return new DataDto(data.getId(), data.getDictionary().getId(), data.getCode(), data.getValue());
+        return new DataDto(data.getId(),
+                new DictionaryDto(data.getDictionary().getId(), data.getDictionary().getCode(), data.getDictionary().getDescription()),
+                data.getCode(),
+                data.getValue());
     }
 
     public void deleteData(UUID id) {

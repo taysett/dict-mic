@@ -1,6 +1,5 @@
 package com.example.dictionary.controller;
 
-import com.example.dictionary.dto.CreateDataDto;
 import com.example.dictionary.dto.DataDto;
 import com.example.dictionary.service.DataService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,11 +33,11 @@ public class DataController {
                             content = @Content(schema = @Schema())
                     )
             })
-    public DataDto createDataRecord(@RequestBody CreateDataDto dataDto) {
+    public DataDto createDataRecord(@RequestBody DataDto dataDto) {
         try {
             return dataService.createData(dataDto);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Dictionary record not found with id: %s", dataDto.getDictionaryId()));
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Dictionary record not found with id: %s", dataDto.getDictionary().getId()));
         }
     }
 

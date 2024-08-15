@@ -1,6 +1,5 @@
 package com.example.dictionary.controller;
 
-import com.example.dictionary.dto.CreateDictionaryDto;
 import com.example.dictionary.dto.DictionaryDto;
 import com.example.dictionary.service.DictionaryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +30,7 @@ public class DictionaryController {
                             description = "Dictionary created successfully",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = DictionaryDto.class)))
             })
-    public DictionaryDto createDictionary(@RequestBody CreateDictionaryDto dictionaryDto) {
+    public DictionaryDto createDictionary(@RequestBody DictionaryDto dictionaryDto) {
         return dictionaryService.createDictionary(dictionaryDto);
     }
 

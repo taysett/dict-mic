@@ -1,6 +1,5 @@
 package com.example.dictionary.service;
 
-import com.example.dictionary.dto.CreateDictionaryDto;
 import com.example.dictionary.dto.DictionaryDto;
 import com.example.dictionary.model.Dictionary;
 import com.example.dictionary.repository.DictionaryRepository;
@@ -18,7 +17,7 @@ public class DictionaryService {
         this.dictionaryRepository = dictionaryRepository;
     }
 
-    public DictionaryDto createDictionary(CreateDictionaryDto dictionaryDto) {
+    public DictionaryDto createDictionary(DictionaryDto dictionaryDto) {
         Dictionary dictionary = Dictionary
                 .builder()
                 .code(dictionaryDto.getCode())

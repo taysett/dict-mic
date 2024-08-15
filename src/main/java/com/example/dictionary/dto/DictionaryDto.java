@@ -19,5 +19,5 @@ public class DictionaryDto {
     private String code;
 
     @Schema(description = "Value of the data record", example = "Hello")
-    private String value;
+    private String description;
 }
